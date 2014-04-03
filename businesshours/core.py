@@ -33,8 +33,8 @@ def calc_business_hours(start, end, weekdays=(1, 2, 3, 4, 5), hours=range(8, 18)
             if end.time().hour <= hours[0]:
                 return 0
             actual_end = datetime.combine(end.date(), time(hours[-1] + 1, 0, 0))
-        secs = (actual_end - actual_start).total_seconds()
-        return secs
+        delta = (actual_end - actual_start)
+        return delta.seconds + (delta.days * 24 * 3600)
     else:
         total_seconds = 0
         dates = [dt for dt in date_range(start, end)]
